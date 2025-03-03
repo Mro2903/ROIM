@@ -11,51 +11,45 @@ import {
 } from "@/components/ui/form";
 import CardWrapper from "../card-wrapper";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/schemas";
+import { ResetPasswordSchema } from "@/schemas";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {useState} from "react";
-import {login} from "@/actions/login";
 import {FormSuccess} from "../form-success";
 import {FormError} from "../form-error";
-import GoogleLogin from "@/components/auth/google-login";
-import Link from "next/link";
+import {reset} from "@/actions/reset";
 
-const LoginForm = () => {
+const ForgotForm = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-    const form = useForm<z.infer<typeof LoginSchema>>({
-        resolver: zodResolver(LoginSchema),
+    const form = useForm<z.infer<typeof ResetPasswordSchema>>({
+        resolver: zodResolver(ResetPasswordSchema),
         defaultValues: {
             email: "",
-            password: "",
         },
     });
 
-    const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
+    const onSubmit = async (data: z.infer<typeof ResetPasswordSchema>) => {
         setLoading(true);
-        login(data).then((res) => {
+        reset(data).then((res) => {
             if (res.error) {
                 setError(res.error);
-                setLoading(false);
             }
             if (res.success) {
-                setError("");
                 setSuccess(res.success);
-                setLoading(false);
             }
-        });
+        })
     };
 
     return (
         <CardWrapper
-            headerLabel="Login to your account"
-            title="Login"
-            backButtonHref="/register"
-            backButtonLabel="Don't have an account"
+            headerLabel="Reset Password"
+            title="Reset"
+            backButtonHref="/login"
+            backButtonLabel="Wait, I remember my password"
             showSocial
         >
             <Form {...form}>
@@ -78,35 +72,16 @@ const LoginForm = () => {
                                 </FormItem>
                             )}
                         />
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Password</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} placeholder="******" type="password" />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
                     </div>
                     <FormSuccess message={success} />
                     <FormError message={error} />
                     <Button type="submit" className="w-full" disabled={loading}>
-                        {loading ? "Loading..." : "Login"}
+                        {loading ? "Loading..." : "Reset"}
                     </Button>
                 </form>
-                <Button className="font-normal w-full">
-                    <Link href="/forgot">
-                        Forgot password?
-                    </Link>
-                </Button>
             </Form>
-            <GoogleLogin />
         </CardWrapper>
     );
 };
 
-export default LoginForm;
+export default ForgotForm;

@@ -25,3 +25,29 @@ export const getVerificationTokenByToken = async (token: string) => {
     }
 
 }
+
+export const getResetTokenByEmail = async (email: string) => {
+    try {
+        return await db.resetToken.findFirst({
+            where: {
+                email: email
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+export const getResetTokenByToken = async (token: string) => {
+    try {
+        return await db.resetToken.findFirst({
+            where: {
+                token: token
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+}

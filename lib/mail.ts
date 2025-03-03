@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 const domain = "http://localhost:3000"
 
-export const sendVerificationEmail = async (email: string, token: string) => {
+export const sendEmail = async (email: string, token: string, path: string) => {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         host: process.env.EMAIL_SERVER_HOST,
@@ -21,7 +21,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
         return
     }
 
-    const confirmationLink = `${domain}/verify-email?token=${token}`
+    const confirmationLink = `${domain}/${path}?token=${token}`
     const mailOptions = {
         from: process.env.EMAIL_SERVER_USER,
         to: email,

@@ -11,33 +11,40 @@ import {
 } from "@/components/ui/form";
 import CardWrapper from "../card-wrapper";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/schemas";
+import { NewPasswordSchema } from "@/schemas";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {useState} from "react";
-import {login} from "@/actions/login";
 import {FormSuccess} from "../form-success";
 import {FormError} from "../form-error";
-import GoogleLogin from "@/components/auth/google-login";
-import Link from "next/link";
+import {newReset} from "@/actions/new-reset";
+import {useSearchParams} from "next/navigation";
 
-const LoginForm = () => {
+const ResetForm = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const searchParams = useSearchParams();
+    const token = searchParams.get("token")
 
-    const form = useForm<z.infer<typeof LoginSchema>>({
-        resolver: zodResolver(LoginSchema),
+    const form = useForm<z.infer<typeof NewPasswordSchema>>({
+        resolver: zodResolver(NewPasswordSchema),
         defaultValues: {
-            email: "",
             password: "",
+            passwordConfirmation: "",
         },
     });
 
-    const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
+    const onSubmit = async (data: z.infer<typeof NewPasswordSchema>) => {
         setLoading(true);
-        login(data).then((res) => {
+
+        if(!token) {
+            setError("No token provided")
+            return
+        }
+
+        newReset(token, data).then((res) => {
             if (res.error) {
                 setError(res.error);
                 setLoading(false);
@@ -52,10 +59,10 @@ const LoginForm = () => {
 
     return (
         <CardWrapper
-            headerLabel="Login to your account"
-            title="Login"
-            backButtonHref="/register"
-            backButtonLabel="Don't have an account"
+            headerLabel="Enter New Password"
+            title="Reset Password"
+            backButtonHref="/login"
+            backButtonLabel="Back to Login"
             showSocial
         >
             <Form {...form}>
@@ -63,16 +70,12 @@ const LoginForm = () => {
                     <div className="space-y-4">
                         <FormField
                             control={form.control}
-                            name="email"
+                            name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel>New Password</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            {...field}
-                                            placeholder="email"
-                                            type="email"
-                                        />
+                                        <Input {...field} placeholder="******" type="password" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -80,10 +83,10 @@ const LoginForm = () => {
                         />
                         <FormField
                             control={form.control}
-                            name="password"
+                            name="passwordConfirmation"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Password</FormLabel>
+                                    <FormLabel>Confirm Password</FormLabel>
                                     <FormControl>
                                         <Input {...field} placeholder="******" type="password" />
                                     </FormControl>
@@ -95,18 +98,12 @@ const LoginForm = () => {
                     <FormSuccess message={success} />
                     <FormError message={error} />
                     <Button type="submit" className="w-full" disabled={loading}>
-                        {loading ? "Loading..." : "Login"}
+                        {loading ? "Loading..." : "Reset"}
                     </Button>
                 </form>
-                <Button className="font-normal w-full">
-                    <Link href="/forgot">
-                        Forgot password?
-                    </Link>
-                </Button>
             </Form>
-            <GoogleLogin />
         </CardWrapper>
     );
 };
 
-export default LoginForm;
+export default ResetForm;

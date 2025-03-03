@@ -2,7 +2,7 @@ import authConfig from "./auth.config"
 import NextAuth from "next-auth"
 import { NextResponse } from "next/server"
 
-const AuthRoutes = ["/login", "/register", "/verify-email"];
+const AuthRoutes = ["/login", "/register", "/verify-email", "/forgot", "/reset-password"]
 const ProtectedRoutes = ["/dashboard"];
 
 const { auth } = NextAuth(authConfig)
