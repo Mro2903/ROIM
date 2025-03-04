@@ -25,3 +25,16 @@ export const getUserByEmail = async (email: string) => {
         return null;
     }
 }
+
+export const getUserByName = async (name: string) => {
+    try {
+        return db.user.findUnique({
+            where: {
+                name,
+            },
+        });
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}

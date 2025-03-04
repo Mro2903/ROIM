@@ -2,18 +2,20 @@
 
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
-import {redirect} from "next/navigation";
+import {OAuthAccountNotLinked} from "@auth/core/errors";
 
 export async function googleAuthenticate() {
     try {
       await signIn('google', {
           redirectTo: '/dashboard',
       });
-      redirect('/dashboard');
     } catch (error) {
-      if (error instanceof AuthError) {
-        return 'google log in failed'
+      if (error instanceof OAuthAccountNotLinked) {
+        return 'this email\'s user does not have a google account linked';
       }
+      if (error instanceof AuthError) {
+        return 'An error occurred while trying to sign in';
+        }
       throw error;
     }
   }

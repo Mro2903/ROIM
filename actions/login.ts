@@ -12,22 +12,24 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
         return { error : "Invalid data" };
     }
 
-    const { email, password } = validatedData;
-    const userExists = await db.user.findFirst({
+    const { name, password } = validatedData;
+    const userExists = await db.user.findUnique({
         where: {
-            email
+            name
         }
     });
 
-    if (!userExists || !userExists.password || !userExists.email) {
+    if (!userExists) {
         return { error: "User not found" };
+    }
+    if (!userExists.password) {
+        return { error: "User has no password (google account)" };
     }
 
     try {
         await signIn("credentials", {
-            email,
+            name,
             password,
-            redirectTo: "/", // Redirect to home page after sign in
         });
     } catch (error) {
         if (error instanceof AuthError) {
@@ -35,6 +37,7 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
                 case "CredentialsSignin":
                     return { error: "Invalid credentials" };
                 default:
+                    console.log(error);
                     return { error: "Please confirm your email address" };
             }
         }

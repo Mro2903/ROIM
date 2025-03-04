@@ -29,15 +29,25 @@ export const register = async (data: z.infer<typeof RegisterSchema>) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Check to see if user already exists
-    const userExists = await db.user.findFirst({
+    const EmailExists = await db.user.findUnique({
       where: {
         email,
       },
     });
 
     // If the user exists, return an error
-    if (userExists) {
+    if (EmailExists) {
       return { error: "Email already is in use. Please try another one." };
+    }
+
+    const NameExists = await db.user.findUnique({
+      where: {
+        name,
+      },
+    });
+
+    if (NameExists) {
+      return { error: "Name already is in use. Please try another one." };
     }
 
     const lowerCaseEmail = email.toLowerCase();

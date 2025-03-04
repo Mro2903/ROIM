@@ -15,22 +15,30 @@ import { LoginSchema } from "@/schemas";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {login} from "@/actions/login";
 import {FormSuccess} from "../form-success";
 import {FormError} from "../form-error";
 import GoogleLogin from "@/components/auth/google-login";
 import Link from "next/link";
+import {useSearchParams} from "next/navigation";
 
 const LoginForm = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const searchParams = useSearchParams()
+
+    useEffect(() => {
+        if (searchParams.get("error")) {
+            setError(searchParams.get("error") as string);
+        }
+    }, [searchParams]);
 
     const form = useForm<z.infer<typeof LoginSchema>>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
-            email: "",
+            name: "",
             password: "",
         },
     });
@@ -63,15 +71,14 @@ const LoginForm = () => {
                     <div className="space-y-4">
                         <FormField
                             control={form.control}
-                            name="email"
+                            name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel>Username</FormLabel>
                                     <FormControl>
                                         <Input
                                             {...field}
-                                            placeholder="email"
-                                            type="email"
+                                            placeholder="username"
                                         />
                                     </FormControl>
                                     <FormMessage />
