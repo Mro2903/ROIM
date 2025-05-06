@@ -21,13 +21,14 @@ import {FormSuccess} from "../form-success";
 import {FormError} from "../form-error";
 import GoogleLogin from "@/components/auth/google-login";
 import Link from "next/link";
-import {useSearchParams} from "next/navigation";
+import {useSearchParams, useRouter} from "next/navigation";
 
 const LoginForm = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const searchParams = useSearchParams()
+    const router = useRouter();
 
     useEffect(() => {
         if (searchParams.get("error")) {
@@ -53,7 +54,7 @@ const LoginForm = () => {
             if (res.success) {
                 setError("");
                 setSuccess(res.success);
-                setLoading(false);
+                router.push("/");
             }
         });
     };

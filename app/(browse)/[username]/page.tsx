@@ -1,50 +1,35 @@
 import {getUserByName} from "@/data/user"
 import {notFound} from "next/navigation";
 import {isFollowingUser} from "@/lib/follow-service";
-import {Actions} from "@/app/(browse)/[username]/_components/actions";
-import {isBlockedByUser, isBlockingUser} from "@/lib/block-service";
+import {isBlockedByUser} from "@/lib/block-service";
+import {StreamPlayer} from "@/components/stream-player";
+import {getStreamById} from "@/lib/stream-service";
 
 interface UserPageProps {
     params : { username : string }
 }
 
 const UserPage = async ({params}: UserPageProps) => {
-    const {username} = await params
-    const user = await getUserByName(username)
-
+    const {username} =  await params;
+    const user = await getUserByName(username);
     if (!user) {
-        notFound()
+        notFound();
+    }
+    const stream = await getStreamById(user.id);
+
+    if (!user || !stream) {
+        notFound();
     }
 
-    const isBlocked = await isBlockedByUser(user.id)
+    const isFollowing = await isFollowingUser(user.id);
+    const isBlocked = await isBlockedByUser(user.id);
 
     if (isBlocked) {
-        notFound()
+        notFound();
     }
 
-    const isFollowing = await isFollowingUser(user.id)
-
-    const isBlocking = await isBlockingUser(user.id)
-
-
-
-
     return (
-        <div className="flex flex-col gap-y-4">
-            <p>
-                username: {user.name}
-            </p>
-            <p>
-                user ID: {user.id}
-            </p>
-            <p>
-                is following: {JSON.stringify(isFollowing)}
-            </p>
-            <p>
-                is blocked by this user: {JSON.stringify(isBlocked)}
-            </p>
-            <Actions isFollowing={isFollowing} isBlocking={isBlocking} userId={user.id}/>
-        </div>
+        <StreamPlayer user={user} stream={stream} isFollowing={isFollowing} />
     )
 }
 

@@ -3,6 +3,8 @@
 import { db } from "@/lib/db"
 import {getUserByEmail} from "@/data/user"
 import { getVerificationTokenByToken} from "@/data/token"
+import {generateVerificationToken} from "@/lib/token";
+import {sendEmail} from "@/lib/mail";
 
 export const newVerification = async (token: string) => {
     const existingToken = await getVerificationTokenByToken(token)
@@ -14,6 +16,8 @@ export const newVerification = async (token: string) => {
     const hasExpired = new Date(existingToken.expires) < new Date()
 
     if(hasExpired) {
+        const verificationToken = await generateVerificationToken(existingToken.email);
+        await sendEmail(existingToken.email, verificationToken.token, 'verify-email');
         return { error: "Token has expired" }
     }
 

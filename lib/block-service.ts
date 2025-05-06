@@ -145,3 +145,21 @@ export const unblockUser = async (userId: string) => {
         }
     });
 }
+
+export const getBlockedUsers = async () => {
+    const session = await auth();
+    const user = session?.user as User;
+
+    if (!user) {
+        return [];
+    }
+
+    return db.block.findMany({
+        where: {
+            blockerId: user.id,
+        },
+        include: {
+            blocked: true,
+        }
+    });
+}

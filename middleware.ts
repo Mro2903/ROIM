@@ -1,9 +1,8 @@
 import authConfig from "./auth.config"
 import NextAuth from "next-auth"
 import { NextResponse } from "next/server"
-
 const AuthRoutes = ["/login", "/register", "/verify-email", "/forgot", "/reset-password"]
-const ProtectedRoutes = ["/dashboard"];
+const ProtectedRoutes = ["/u"];
 
 const { auth } = NextAuth(authConfig)
 export default auth(async function middleware(req) {
@@ -19,9 +18,9 @@ export default auth(async function middleware(req) {
         return;
     } else {
         if (isAuthRoute) {
-            return NextResponse.redirect(new URL("/dashboard", req.url))
+            return NextResponse.redirect(new URL("/", req.url))
         }
     }
 })
 
-export const config = { matcher: ['/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'] }
+export const config = { matcher: ['/((?!api|_next/static|_next/image|logo.png).*)'] }

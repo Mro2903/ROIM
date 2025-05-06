@@ -5,6 +5,7 @@ import {LoginSchema} from "@/schemas";
 import {signIn} from "@/auth";
 import {db} from "@/lib/db";
 import {AuthError} from "next-auth";
+import {isRedirectError} from "next/dist/client/components/redirect";
 
 export const login = async (data: z.infer<typeof LoginSchema>) => {
     const validatedData = LoginSchema.parse(data);
@@ -30,6 +31,7 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
         await signIn("credentials", {
             name,
             password,
+            redirect: false
         });
     } catch (error) {
         if (error instanceof AuthError) {
@@ -37,9 +39,12 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
                 case "CredentialsSignin":
                     return { error: "Invalid credentials" };
                 default:
-                    console.log(error);
+                    console.log(error)
                     return { error: "Please confirm your email address" };
             }
+        }
+        if (isRedirectError(error)) {
+            return { error: "Redirect error" };
         }
         console.error(error);
         return { error: "An error occurred" };

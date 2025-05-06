@@ -1,0 +1,23 @@
+# .dockerignore
+
+# Node.js
+node_modules/
+
+# Environment files (handled separately in production)
+.env
+.env.local
+
+# Git
+.git/
+.gitignore
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# Docker Compose files (optional, if not needed in the image)
+docker-compose.yml
+docker-compose.*.yml
+
+# Documentation
+README.md

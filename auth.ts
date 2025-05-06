@@ -17,10 +17,8 @@ export const {
                 return true;
             }
             const existingUser = await getUserById(user.id ?? "");
-            if (!existingUser?.emailVerified) {
-                return false;
-            }
-            return true;
+            return !!existingUser?.emailVerified;
+
         },
         async session({ token, session }) {
 

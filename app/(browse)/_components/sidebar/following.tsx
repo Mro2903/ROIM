@@ -5,7 +5,11 @@ import {useSidebar} from "@/store/use-sidebar";
 import {UserItem, UserItemSkeleton} from "@/app/(browse)/_components/sidebar/user-item";
 
 interface FollowingProps {
-    data: (Follow & { following: User })[];
+    data: (Follow & {
+        following: User & {
+        stream: {isLive: boolean} | null
+        }
+    })[];
 }
 
 export const Following = ({ data }: FollowingProps) => {
@@ -24,7 +28,7 @@ export const Following = ({ data }: FollowingProps) => {
 
             <ul className="space-y2 px-2">
                 {data.map((user) => (
-                    < UserItem username={user.following.name} image={user.following.image} isLive={false} key={user.following.id} />
+                    < UserItem username={user.following.name} image={user.following.image} isLive={user.following.stream?.isLive} key={user.following.id} />
                 ))}
             </ul>
         </div>

@@ -11,10 +11,8 @@ export const getRecommended = async () => {
         console.log("Failed to get self", error);
     }
 
-    let users : Array<User>;
-
     if (user) {
-        users = await db.user.findMany({
+        return db.user.findMany({
             where: {
                 AND: [{
                     NOT: {
@@ -39,15 +37,27 @@ export const getRecommended = async () => {
                 }]
 
             },
+            include: {
+                stream: {
+                    select: {
+                        isLive: true,
+                    },
+                },
+            },
             orderBy: {createdAt: "desc"},
             take: 5,
         });
     } else {
-        users = await db.user.findMany({
+        return db.user.findMany({
+            include: {
+                stream: {
+                    select: {
+                        isLive: true,
+                    },
+                },
+            },
             orderBy: {createdAt: "desc"},
             take: 5,
         });
     }
-
-    return users;
 }

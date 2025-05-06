@@ -1,13 +1,12 @@
 'use client';
 
 import { googleAuthenticate } from '@/actions/google-login';
-import React from 'react'
-import { useFormState } from 'react-dom'
+import { useActionState } from 'react'
 import { BsGoogle } from 'react-icons/bs';
 import { Button } from '../ui/button';
 
 const GoogleLogin = () => {
-    const [errorMsgGoogle, dispatchGoogle] = useFormState(googleAuthenticate, "");
+    const [errorMsgGoogle, dispatchGoogle] = useActionState(googleAuthenticate, "");
 
 
   return (

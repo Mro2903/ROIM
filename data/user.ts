@@ -32,6 +32,28 @@ export const getUserByName = async (name: string) => {
             where: {
                 name,
             },
+            select: {
+                id: true,
+                name: true,
+                bio: true,
+                image: true,
+                stream: {
+                    select: {
+                        id: true,
+                        name: true,
+                        isLive: true,
+                        isChatDelayed: true,
+                        isChatEnabled: true,
+                        isChatFollowersOnly: true,
+                        thumbnailUrl: true,
+                    },
+                },
+                _count: {
+                    select: {
+                        followedBy: true,
+                        },
+                    },
+                },
         });
     } catch (error) {
         console.error(error);
