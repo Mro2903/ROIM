@@ -11,7 +11,7 @@ export const Action = () => {
         <div className="flex items-center gap-x-2 justify-end ml-4 lg:ml-0">
             <div className="flex items-center gap-x-4">
                 <Button className="hover:bg-accent hover:text-accent-foreground text-foreground hover:opacity-75 transition">
-                    <Link href="/" >
+                    <Link href="/public" >
                         <LogOut className="h-5 w-5 mr-2"/>
                     </Link>
                 </Button>

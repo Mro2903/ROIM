@@ -51,10 +51,10 @@ export default function UserButton() {
                             Profile
                         </Button>
                         <Button
-                            onClick={() => router.push("/settings")}
+                            onClick={() => router.push("/u/community")}
                             className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
-                            Settings
+                            Community
                         </Button>
                         <Button
                             onClick={handleLogout}

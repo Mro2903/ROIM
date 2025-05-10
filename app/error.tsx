@@ -10,7 +10,7 @@ const ErrorPage = () => {
                 Something went wrong.
             </p>
             <Button className="w-full max-w-sm rounded-md border border-blue-600 bg-blue-600 text-white hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 shadow-md transition duration-200 ease-in-out">
-                <Link href="/">
+                <Link href="/public">
                     Go back to home
                 </Link>
             </Button>

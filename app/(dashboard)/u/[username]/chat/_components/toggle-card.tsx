@@ -27,7 +27,7 @@ export const ToggleCard = ({ field, label, value }: ToggleCardProps) => {
     }
 
     return (
-        <div className="rounded-xl p-6 bg-[#2D2E32]">
+        <div className="rounded-xl p-6 dark:bg-[#2D2E32] bg-white">
             <div className="flex items-center justify-between">
                 <p className="font-semibold shrink-0">
                     {label}

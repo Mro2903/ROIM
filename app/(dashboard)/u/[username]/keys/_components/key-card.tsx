@@ -13,7 +13,7 @@ export const KeyCard = ({ value }: KeyCardProps) => {
     const [show, setShow] = useState(false);
 
     return (
-        <div className="bg-[#2D2E32] p-6 rounded-xl">
+        <div className="dark:bg-[#2D2E32] bg-white p-6 rounded-xl">
             <div className="flex items-start gap-x-10">
                 <p className="font-semibold shrink-0">
                     Stream Key

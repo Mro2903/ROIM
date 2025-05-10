@@ -10,8 +10,8 @@ import {getUserByName} from "@/data/user";
 export default {
     providers: [
         Google({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
             async profile(profile) {
                 let username = profile.email.split('@')[0];
                 while (await getUserByName(username)) {
@@ -27,6 +27,10 @@ export default {
             }
         }),
         Credentials({
+            credentials: {
+                username: { label: "Username", type: "text", placeholder: "Username" },
+                password: { label: "Password", type: "password", placeholder: "Password" }
+            },
             async authorize(credentials) {
                 const  validateData = LoginSchema.safeParse(credentials);
                 if (!validateData.success) {

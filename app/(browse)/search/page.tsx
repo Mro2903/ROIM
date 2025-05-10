@@ -2,15 +2,13 @@ import {redirect} from "next/navigation";
 import {Results, ResultsSkeleton} from "@/app/(browse)/search/_components/results";
 import {Suspense} from "react";
 
-interface SearchPageProps {
-    searchParams: {
-        term?: string;
-    }
-}
-
-const SearchPage = async ({ searchParams }: SearchPageProps) => {
+const SearchPage = async ({
+                              searchParams,
+                          }: {
+    searchParams: Promise<{ [term: string]: string | string[] | undefined }>
+}) => {
     const {term} = await searchParams;
-    if(!term) {
+    if(!term || Array.isArray(term) || term.length === 0) {
         redirect("/");
     }
 

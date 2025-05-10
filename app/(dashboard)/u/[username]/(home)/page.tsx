@@ -3,12 +3,7 @@ import {getUserByName} from "@/data/user";
 import {StreamPlayer} from "@/components/stream-player";
 import {getStreamById} from "@/lib/stream-service";
 
-
-interface CreatorPageProps {
-    params : { username : string }
-}
-
-const CreatorPage = async ({params}: CreatorPageProps) => {
+const CreatorPage = async ({ params,}: { params: Promise<{ username: string }>}) => {
     const {username} = await params
     const session = await auth();
     const externalUser = session?.user;

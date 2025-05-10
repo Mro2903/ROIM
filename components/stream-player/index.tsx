@@ -1,7 +1,6 @@
 "use client";
 
 import {useEffect, useState} from "react";
-import {Stream, User} from "@prisma/client";
 import {useViewerToken} from "@/hooks/use-viewer-token";
 import {useChatSidebar} from "@/store/use-chat-sidebar";
 import {cn} from "@/lib/utils";
@@ -13,6 +12,7 @@ import {ChatToggle} from "@/components/stream-player/chat-toggle";
 import {Header, HeaderSkeleton} from "@/components/stream-player/header";
 import {InfoCard} from "@/components/stream-player/info-card";
 import {AboutCard} from "@/components/stream-player/about-card";
+import {toast} from "sonner";
 
 type CustomStream = {
     id: string;
@@ -43,27 +43,38 @@ interface StreamPlayerProps {
 
 export const StreamPlayer = ({user, stream, isFollowing}: StreamPlayerProps) => {
     const {token, name, identity} = useViewerToken(user.id)
+    const [isConnected, setIsConnected] = useState(false);
     const {collapsed} = useChatSidebar();
     const [room] = useState(() => new Room({}));
 
     useEffect(() => {
         const connectRoom = async () => {
-            await room.connect(process.env.NEXT_PUBLIC_LIVEKIT_URL!, token);
+            try {
+                await room.connect(process.env.NEXT_PUBLIC_LIVEKIT_URL!, token);
+                setIsConnected(true);
+                toast.success("Connected to room");
+            } catch (error) {
+                console.error("Failed to connect to room", error);
+                toast.error("Failed to connect to room");
+            }
         };
-
-        connectRoom()
+        if (token) {
+            connectRoom()
+        }
 
         return () => {
-            room.disconnect();
+            if (room.state === "connected") {
+                room.disconnect();
+            }
         };
     }, [token, room]);
-    if (!token || !name || !identity) {
+    if (!token || !name || !identity || !isConnected) {
         return <StreamPlayerSkeleton />
     }
     return <>
         {collapsed && (<div className="hidden lg:block fixed top-[100px] right-2 z-50">
-            <ChatToggle />
-        </div>
+                <ChatToggle />
+            </div>
         )}
         <RoomContext.Provider value={room}>
             <div className={cn("grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full",
@@ -106,7 +117,7 @@ export const StreamPlayer = ({user, stream, isFollowing}: StreamPlayerProps) => 
             </div>
         </RoomContext.Provider>
     </>
-}
+};
 
 export const StreamPlayerSkeleton = () => {
     return (
@@ -120,4 +131,4 @@ export const StreamPlayerSkeleton = () => {
             </div>
         </div>
     )
-}
+};

@@ -5,7 +5,6 @@ import { useConnectionState, useRemoteParticipant, useTracks} from "@livekit/com
 import {OfflineVideo} from "@/components/stream-player/offline-video";
 import {LoadingVideo} from "@/components/stream-player/loading-video";
 import {LiveVideo} from "@/components/stream-player/live-video";
-import exp from "node:constants";
 import {Skeleton} from "@/components/ui/skeleton";
 
 interface VideoProps {
@@ -28,7 +27,7 @@ export const Video = ({ hostName, hostIdentity }: VideoProps) => {
     } else if (!participant || tracks.length === 0) {
         content = <LoadingVideo label={connectionState} />;
     } else {
-        content = <LiveVideo participant={participant}/>;
+        content = <LiveVideo participantId={participant.identity}/>;
     }
     return (
         <div className="aspect-video border-b group relative">

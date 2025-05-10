@@ -26,7 +26,7 @@ export const VariantToggle = () => {
     return (
         <Hint label={label} position="left">
             <Button
-                className="h-auto p-2 hover:bg-white/10 hover:text-pretty bg-transparent text-white rounded-full"
+                className="h-auto p-2 hover:bg-white/10 hover:text-pretty bg-transparent dark:text-white text-black rounded-full"
                 onClick={onToggle}
             >
                 <Icon className="h-4 w-4" />

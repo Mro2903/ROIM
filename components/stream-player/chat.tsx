@@ -61,7 +61,8 @@ export const Chat = ({
     }
 
     return (
-        <div className="flex flex-col border-l border-b border-background pt-0 h-[calc(100vh-80px)] bg-[#1e1e1e] border-[#2D2E35]">
+        <div className="flex flex-col border-l border-b border-background pt-0 h-[calc(100vh-80px)] dark:bg-[#1e1e1e] bg-white/10
+        border-[#2D2E35]">
             <ChatHeader />
             {variant === ChatVeriant.CHAT && (
                 <>

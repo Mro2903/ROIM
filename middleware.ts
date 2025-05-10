@@ -1,11 +1,11 @@
 import authConfig from "./auth.config"
 import NextAuth from "next-auth"
-import { NextResponse } from "next/server"
+import {NextResponse} from "next/server"
 const AuthRoutes = ["/login", "/register", "/verify-email", "/forgot", "/reset-password"]
 const ProtectedRoutes = ["/u"];
 
-const { auth } = NextAuth(authConfig)
-export default auth(async function middleware(req) {
+const { auth: middleware } = NextAuth(authConfig)
+export default middleware(async function middleware(req) {
     const isAuth = !!req.auth
     const isAuthRoute = AuthRoutes.includes(req.nextUrl.pathname)
     const isProtectedRoute = ProtectedRoutes.includes(req.nextUrl.pathname)

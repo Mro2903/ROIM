@@ -1,10 +1,14 @@
 import ForgotForm from '@/components/auth/forms/forgot-form'
+import {Suspense} from "react";
+import FormSkeleton from "@/components/auth/forms/form-skeleton";
 
 const ForgotPage = () => {
     return (
-        <div>
+    <div>
+        <Suspense fallback={<FormSkeleton />}>
             <ForgotForm />
-        </div>
+        </Suspense>
+    </div>
     )
 }
 

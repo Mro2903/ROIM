@@ -1,9 +1,12 @@
 import RegisterForm from '@/components/auth/forms/register-form'
-import React from 'react'
+import React, {Suspense} from 'react'
+import FormSkeleton from "@/components/auth/forms/form-skeleton";
 
 const RegisterPage = () => {
     return (
-        <RegisterForm />
+        <Suspense fallback={<FormSkeleton />}>
+            <RegisterForm />
+        </Suspense>
     )
 }
 

@@ -7,7 +7,7 @@ import {Wrapper} from "@/app/(browse)/_components/navbar/wrapper";
 export const Navbar = () => {
     return (
         <Wrapper>
-            <nav className="fixed top-0 w-full h-20 z-[49] bg-[#252731] px-2 lg:4 flex justify-between items-center shadow-sm">
+            <nav className="fixed top-0 w-full h-20 z-[49] dark:bg-[#252731] bg-white px-2 lg:4 flex justify-between items-center shadow-sm">
                 <Logo />
                 <Search />
                 <Action />

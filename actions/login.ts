@@ -5,7 +5,6 @@ import {LoginSchema} from "@/schemas";
 import {signIn} from "@/auth";
 import {db} from "@/lib/db";
 import {AuthError} from "next-auth";
-import {isRedirectError} from "next/dist/client/components/redirect";
 
 export const login = async (data: z.infer<typeof LoginSchema>) => {
     const validatedData = LoginSchema.parse(data);
@@ -35,16 +34,18 @@ export const login = async (data: z.infer<typeof LoginSchema>) => {
         });
     } catch (error) {
         if (error instanceof AuthError) {
-            switch (error.type) {
-                case "CredentialsSignin":
-                    return { error: "Invalid credentials" };
-                default:
-                    console.log(error)
-                    return { error: "Please confirm your email address" };
+            const authError = error as Error & { message?: string };
+
+            // Check the error message instead of using type property
+            if (authError.message?.includes("CredentialsSignin")) {
+                return { error: "Invalid credentials" };
+            } else {
+                console.log(error);
+                return { error: "Please confirm your email address" };
             }
         }
-        if (isRedirectError(error)) {
-            return { error: "Redirect error" };
+        if (error instanceof Error && error.message?.includes("NEXT_REDIRECT")) {
+            throw error
         }
         console.error(error);
         return { error: "An error occurred" };

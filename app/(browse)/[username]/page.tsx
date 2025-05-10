@@ -5,11 +5,7 @@ import {isBlockedByUser} from "@/lib/block-service";
 import {StreamPlayer} from "@/components/stream-player";
 import {getStreamById} from "@/lib/stream-service";
 
-interface UserPageProps {
-    params : { username : string }
-}
-
-const UserPage = async ({params}: UserPageProps) => {
+const UserPage = async ({ params,}: { params: Promise<{ username: string }>}) => {
     const {username} =  await params;
     const user = await getUserByName(username);
     if (!user) {

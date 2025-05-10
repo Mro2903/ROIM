@@ -1,17 +1,18 @@
 "use client";
 
-import {Participant, Track} from "livekit-client";
+import {Track} from "livekit-client";
 import {useEffect, useRef, useState} from "react";
 import {useTracks} from "@livekit/components-react";
 import {FullScreenControl} from "@/components/stream-player/full-screen-control";
-import {useEventListener} from "usehooks-ts";
 import {VolumeControl} from "@/components/stream-player/volume-control";
 
 interface LiveVideoProps {
-    participant: Participant
+    participantId: string;
 }
 
-export const LiveVideo = ({ participant }: LiveVideoProps) => {
+export const LiveVideo = ({participantId}: LiveVideoProps) => {
+
+
     const videoRef = useRef<HTMLVideoElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -20,6 +21,13 @@ export const LiveVideo = ({ participant }: LiveVideoProps) => {
 
     useEffect(() => {
         onVolumeChange(0);
+        const handleFullscreenChange = () => {
+            setIsFullscreen(!!document.fullscreenElement);
+        };
+        document.addEventListener("fullscreenchange", handleFullscreenChange);
+        return () => {
+            document.removeEventListener("fullscreenchange", handleFullscreenChange);
+        };
     }, []);
 
     const onVolumeChange = (value: number) => {
@@ -49,18 +57,8 @@ export const LiveVideo = ({ participant }: LiveVideoProps) => {
         }
     }
 
-    const handleFullScreenChange = () => {
-        if (document.fullscreenElement) {
-            setIsFullscreen(true);
-        } else {
-            setIsFullscreen(false);
-        }
-    }
-
-    useEventListener("fullscreenchange", handleFullScreenChange, wrapperRef);
-
     useTracks([Track.Source.Camera, Track.Source.Microphone])
-        .filter(track => track.participant.identity === participant.identity)
+        .filter(track => track.participant.identity === participantId)
         .forEach(track => {
             if (videoRef.current) {
                 track.publication.track?.attach(videoRef.current);
@@ -76,7 +74,7 @@ export const LiveVideo = ({ participant }: LiveVideoProps) => {
             <div className="absolute top-0 h-full w-full opacity-0 hover:opacity-100 hover:transition-all">
                 <div className="absolute bottom-0 flex h-14 w-full items-center justify-between bg-gradient-to-r from-neutral-900 px-4">
                     <VolumeControl onToggleAction={toggleMute} onChangeAction={onVolumeChange} volume={volume} />
-                    <FullScreenControl isFullscreen action={toggleFullscreen} />
+                    <FullScreenControl isFullscreen={isFullscreen} action={toggleFullscreen} />
                 </div>
             </div>
         </div>

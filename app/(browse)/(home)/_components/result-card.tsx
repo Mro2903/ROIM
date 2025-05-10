@@ -1,7 +1,6 @@
-import {Stream, User} from "@prisma/client";
+import {User} from "@prisma/client";
 import Link from "next/link";
 import {Thumbnail, ThumbnailSkeleton} from "@/components/thumbnail";
-import {LiveBadge} from "@/components/ui/live-badge";
 import {UserAvatar, UserAvatarSkeleton} from "@/components/ui/user-avatar";
 import {Skeleton} from "@/components/ui/skeleton";
 

@@ -48,9 +48,9 @@ export const ConnectModal = () => {
         });
     }
     return (
-        <Dialog>
+        <Dialog modal={false}>
             <DialogTrigger asChild>
-                <Button className="bg-[#2D2E32] text-white">
+                <Button className="dark:bg-[#2D2E32] bg-white">
                     Generate Connection
                 </Button>
             </DialogTrigger>
@@ -70,7 +70,7 @@ export const ConnectModal = () => {
                     <SelectTrigger className="w-full">
                         <SelectValue placeholder="Ingress Type" />
                     </SelectTrigger>
-                    <SelectContent className="bg-background ">
+                    <SelectContent className="bg-white dark:bg-[#2D2E32]">
                         <SelectItem value={RTMP}>RTMP</SelectItem>
                         <SelectItem value={WHIP}>WHIP</SelectItem>
                     </SelectContent>
