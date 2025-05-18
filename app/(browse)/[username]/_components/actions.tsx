@@ -42,6 +42,10 @@ export const Actions = ({ isFollowing, isBlocking, userId }: ActionsProps) => {
 
     const handleBlock = () => {
         onBlock(userId).then((data) => {
+            if (!data) {
+                toast.error("Failed to block user");
+                return;
+            }
             toast.success("You have blocked " + data.blocked.name);
         }).catch(() => {
             toast.error("Failed to block user");

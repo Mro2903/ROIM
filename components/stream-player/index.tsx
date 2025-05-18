@@ -5,7 +5,7 @@ import {useViewerToken} from "@/hooks/use-viewer-token";
 import {useChatSidebar} from "@/store/use-chat-sidebar";
 import {cn} from "@/lib/utils";
 import {RoomContext} from "@livekit/components-react";
-import {Video, VideoSkeleton} from "@/components/stream-player/Video";
+import {Video, VideoSkeleton} from "@/components/stream-player/video";
 import {Room} from "livekit-client";
 import {Chat, ChatSkeleton} from "@/components/stream-player/chat";
 import {ChatToggle} from "@/components/stream-player/chat-toggle";
