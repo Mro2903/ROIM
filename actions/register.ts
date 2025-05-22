@@ -26,7 +26,7 @@ export const register = async (data: z.infer<typeof RegisterSchema>) => {
     }
 
     // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password + process.env.AUTH_SECRET, 10);
 
     // Check to see if user already exists
     const EmailExists = await db.user.findUnique({

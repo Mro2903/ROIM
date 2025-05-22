@@ -48,7 +48,7 @@ export default {
                     return null;
                 }
 
-                const isPasswordValid = await bcrypt.compare(password, user.password);
+                const isPasswordValid = await bcrypt.compare(password + process.env.AUTH_SECRET!, user.password);
 
                 if (!isPasswordValid) {
                     return null;
