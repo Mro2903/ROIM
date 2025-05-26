@@ -9,6 +9,15 @@ interface UnblockButtonProps {
     userId: string;
 }
 
+/**
+ * A button component that allows unblocking a user by their user ID.
+ *
+ * When clicked, it triggers the `onUnblock` function for the specified user,
+ * displays a success toast on success, or an error toast on failure.
+ * The button is disabled while the unblock operation is pending.
+ *
+ * @param userId - The unique identifier of the user to be unblocked.
+ */
 export const UnblockButton = ({userId}: UnblockButtonProps) => {
     const [isPending, startTransition] = useTransition();
 

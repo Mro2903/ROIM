@@ -6,6 +6,17 @@ interface CreatorSidebarStore {
     onCollapse: () => void;
 }
 
+/**
+ * Zustand store hook for managing the state of the creator sidebar.
+ *
+ * @returns An object containing:
+ * - `collapsed`: A boolean indicating whether the sidebar is collapsed.
+ * - `onExpand`: A function to expand the sidebar (sets `collapsed` to `false`).
+ * - `onCollapse`: A function to collapse the sidebar (sets `collapsed` to `true`).
+ *
+ * @example
+ * const { collapsed, onExpand, onCollapse } = useCreatorSidebar();
+ */
 export const useCreatorSidebar = create<CreatorSidebarStore>((set) => ({
     collapsed: false,
     onExpand: () => set({ collapsed: false }),

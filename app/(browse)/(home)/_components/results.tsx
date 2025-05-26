@@ -2,6 +2,14 @@ import {getStreams} from "@/lib/stream-service";
 import {ResultCard, ResultCardSkeleton} from "@/app/(browse)/(home)/_components/result-card";
 import {Skeleton} from "@/components/ui/skeleton";
 
+/**
+ * Asynchronously fetches and displays a list of recommended streams.
+ *
+ * Renders a heading, a message if no streams are found, and a responsive grid of `ResultCard` components
+ * for each stream in the fetched data.
+ *
+ * @returns {Promise<JSX.Element>} A React component displaying recommended streams or a message if none are found.
+ */
 export const Results = async () => {
 
     const data = await getStreams();

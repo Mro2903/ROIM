@@ -5,6 +5,15 @@ import {Fullscreen, KeyRound, MessageSquare, Users} from "lucide-react";
 import {useSession} from "next-auth/react";
 import {NavItem, NavItemSkeleton} from "@/app/(dashboard)/u/[username]/_components/sidebar/nav-item";
 
+/**
+ * Renders the navigation sidebar for the user dashboard.
+ *
+ * - Displays navigation links (Stream, Keys, Chat, Community) based on the authenticated user's name.
+ * - Shows skeleton placeholders if the user session is not yet loaded or the username is unavailable.
+ * - Highlights the active navigation item based on the current pathname.
+ *
+ * @returns {JSX.Element} The navigation sidebar component.
+ */
 export const Navigation = () => {
     const pathname = usePathname();
     const {data: session} = useSession();

@@ -16,6 +16,12 @@ interface ResultCardProps {
     }
 }
 
+/**
+ * Renders a card displaying the result information for a user.
+ *
+ * @param data - The result data containing user and stream information.
+ * @returns A React component displaying the user's thumbnail, name, verification mark, stream name, and last updated time.
+ */
 export const ResultCard = ({data}: ResultCardProps) => {
     return (
         <Link href={`/${data.user.name}`}>

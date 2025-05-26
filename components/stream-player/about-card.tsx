@@ -10,7 +10,18 @@ interface AboutCardProps {
     bio: string | null;
     followedByCount: number;
 }
-
+/**
+ * Renders an about card for a stream host, displaying their name, verification mark,
+ * follower count, and bio. If the current viewer is the host, allows editing the bio via a modal.
+ *
+ * @param hostName - The display name of the host.
+ * @param hostIdentity - The unique identity string of the host.
+ * @param viewerIdentity - The unique identity string of the current viewer.
+ * @param bio - The biography text of the host, or null if not set.
+ * @param followedByCount - The number of followers the host has.
+ *
+ * @returns A React component displaying the host's about information.
+ */
 export const AboutCard = ({
     hostName,
     hostIdentity,

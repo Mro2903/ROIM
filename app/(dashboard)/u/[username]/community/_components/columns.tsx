@@ -16,6 +16,18 @@ export type BlockedUser = {
     createdAt: string
 }
 
+/**
+ * Column definitions for the blocked users table in the community dashboard.
+ *
+ * - "username": Displays the blocked user's avatar and username, with sortable header.
+ * - "createdAt": Shows the date the user was blocked, with sortable header.
+ * - "actions": Renders an unblock button for each blocked user.
+ *
+ * @remarks
+ * Uses custom components such as `UserAvatar`, `UnblockButton`, and `ArrowUpDown` for enhanced UI.
+ *
+ * @typeParam BlockedUser - The shape of the blocked user data.
+ */
 export const columns: ColumnDef<BlockedUser>[] = [
     {
         accessorKey: "username",

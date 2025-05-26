@@ -4,6 +4,14 @@ import {Action, ActionSkeleton} from "./action"
 import {Wrapper} from "@/app/(browse)/_components/navbar/wrapper";
 
 
+/**
+ * Renders the main navigation bar for the application.
+ *
+ * The `Navbar` component includes the application logo, a search bar, and action buttons.
+ * It is fixed to the top of the viewport and styled for both light and dark themes.
+ *
+ * @returns {JSX.Element} The navigation bar component.
+ */
 export const Navbar = () => {
     return (
         <Wrapper>

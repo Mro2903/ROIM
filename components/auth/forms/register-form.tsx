@@ -20,6 +20,18 @@ import {register} from "@/actions/register";
 import {FormSuccess} from "../form-success";
 import {FormError} from "../form-error";
 
+/**
+ * RegisterForm component renders a user registration form with fields for email, name, password, and password confirmation.
+ * 
+ * - Utilizes React Hook Form with Zod schema validation for form state management and validation.
+ * - Handles form submission asynchronously, displaying loading, success, and error states.
+ * - Displays success and error messages based on the registration response.
+ * - Includes a link to the login page for users who already have an account.
+ * - Supports social authentication options via the `showSocial` prop in the CardWrapper.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered registration form component.
+ */
 const RegisterForm = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");

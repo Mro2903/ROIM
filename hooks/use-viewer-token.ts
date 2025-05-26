@@ -3,6 +3,16 @@ import {useEffect, useState} from "react";
 import {JwtPayload, jwtDecode} from "jwt-decode";
 import {createViewerToken} from "@/actions/token";
 
+/**
+ * Custom React hook to generate and manage a viewer token based on the provided host identity.
+ *
+ * This hook asynchronously creates a viewer token using the given `hostIdentity`, decodes it to extract
+ * the user's name and identity, and manages these values in local state. If token creation fails,
+ * an error toast is displayed.
+ *
+ * @param hostIdentity - The identity of the host for whom the viewer token is to be created.
+ * @returns An object containing the generated `token`, the user's `name`, and their `identity`.
+ */
 export const useViewerToken = (hostIdentity: string) => {
     const [token, setToken] = useState("");
     const [name, setName] = useState("");

@@ -14,6 +14,13 @@ interface ResultCardProps {
     }
 }
 
+/**
+ * Renders a card displaying the result information, including a thumbnail,
+ * user avatar, and user details. The card links to the user's page.
+ *
+ * @param data - The result data containing information about the user, thumbnail, and live status.
+ * @returns A JSX element representing the result card.
+ */
 export const ResultCard = ({data}: ResultCardProps) => {
     return (
         <Link href={`/${data.user.name}`}>

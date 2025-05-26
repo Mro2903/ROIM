@@ -7,6 +7,17 @@ import UserButton, {UserButtonSkeleton} from "@/components/auth/userButton";
 import {useSession} from "next-auth/react";
 import {Skeleton} from "@/components/ui/skeleton";
 
+/**
+ * Renders the action buttons in the navbar based on the user's authentication state.
+ * 
+ * - If the user is not authenticated, displays a "Login" button.
+ * - If the user is authenticated, displays a "Dashboard" button linking to the user's dashboard
+ *   and a user menu button.
+ *
+ * Utilizes session data from `useSession` to determine authentication state.
+ *
+ * @returns {JSX.Element} The rendered action buttons for the navbar.
+ */
 export const Action = () => {
     const { data: session } = useSession();
     const user = session?.user;

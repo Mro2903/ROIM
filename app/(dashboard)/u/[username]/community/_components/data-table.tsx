@@ -29,6 +29,22 @@ interface DataTableProps<TData, TValue> {
     data: TData[]
 }
 
+/**
+ * Renders a data table with sorting, filtering, and pagination capabilities.
+ *
+ * @template TData - The type of the data objects in the table.
+ * @template TValue - The type of the value used for filtering or sorting.
+ * @param props - The properties for the DataTable component.
+ * @param props.columns - The column definitions for the table.
+ * @param props.data - The array of data to display in the table.
+ *
+ * @remarks
+ * - Integrates with TanStack Table for advanced table features.
+ * - Provides a filter input for the "username" column.
+ * - Displays pagination controls and handles empty states.
+ *
+ * @returns A React component that displays a data table with interactive features.
+ */
 export function DataTable<TData, TValue>({
                                              columns,
                                              data,

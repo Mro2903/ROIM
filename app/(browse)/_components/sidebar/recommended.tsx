@@ -10,6 +10,14 @@ interface RecommendedProps {
     })[];
 }
 
+/**
+ * Renders a recommended users section in the sidebar.
+ *
+ * Displays a "Recommended" label and a list of recommended users if the sidebar is expanded and there is data available.
+ *
+ * @param data - An array of user objects to display in the recommended list.
+ * @returns A React component displaying the recommended users.
+ */
 export const Recommended = ({ data }: RecommendedProps) => {
     const { collapsed } = useSidebar((state) => state);
 

@@ -32,6 +32,24 @@ const WHIP = String(IngressInput.WHIP_INPUT);
 
 type IngressType = typeof RTMP | typeof WHIP;
 
+/**
+ * ConnectModal component provides a dialog interface for generating a new streaming connection.
+ *
+ * This modal allows users to select an ingress type (RTMP or WHIP) and initiate the creation of a new ingress.
+ * Upon submission, it triggers the `createIngress` function and displays success or error toasts based on the result.
+ * The modal also warns users that generating a new connection will reset all active streams using the current connection.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered ConnectModal dialog component.
+ *
+ * @example
+ * <ConnectModal />
+ *
+ * @remarks
+ * - Uses `useTransition` for handling async submission state.
+ * - Uses `useRef` to programmatically close the dialog after successful submission.
+ * - Disables controls while the submission is pending.
+ */
 export const ConnectModal = () => {
     const closeRef = useRef<ComponentRef<"button">>(null);
     const [isPending, startTransition] = useTransition();

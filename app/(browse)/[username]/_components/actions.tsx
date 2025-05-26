@@ -12,6 +12,19 @@ interface ActionsProps {
     userId: string;
 }
 
+/**
+ * Renders action buttons for following/unfollowing and blocking/unblocking a user.
+ *
+ * @param isFollowing - Indicates if the current user is already following the target user.
+ * @param isBlocking - Indicates if the current user is already blocking the target user.
+ * @param userId - The unique identifier of the target user.
+ *
+ * The component provides two buttons:
+ * - "Follow"/"Unfollow": Toggles the follow state for the target user.
+ * - "Block"/"Unblock": Toggles the block state for the target user.
+ *
+ * Displays toast notifications on success or failure of each action.
+ */
 export const Actions = ({ isFollowing, isBlocking, userId }: ActionsProps) => {
     const [isPending, startTransition] = useTransition();
 

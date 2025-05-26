@@ -13,6 +13,17 @@ interface ToggleCardProps {
     value: boolean;
 }
 
+/**
+ * A card component that displays a toggle switch for updating a specific chat setting.
+ *
+ * @param field - The key of the setting to update.
+ * @param label - The label to display for the setting.
+ * @param value - The current value of the setting (on/off).
+ *
+ * Renders a styled card with a label and a toggle switch. When the switch is toggled,
+ * it triggers an asynchronous update of the setting and displays a toast notification
+ * indicating success or failure. The switch is disabled while the update is pending.
+ */
 export const ToggleCard = ({ field, label, value }: ToggleCardProps) => {
     const [isPending, startTransition] = useTransition();
 

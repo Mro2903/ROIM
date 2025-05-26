@@ -9,6 +9,25 @@ import {Avatar} from "@/components/ui/avatar";
 import {useSession, signOut} from "next-auth/react";
 import {Skeleton} from "@/components/ui/skeleton";
 
+/**
+ * Renders a user avatar button with a dropdown menu for authenticated users.
+ *
+ * The `UserButton` component displays the current user's avatar (or a fallback icon)
+ * and provides a dropdown menu with navigation options such as "Profile", "Community",
+ * and "Logout". The dropdown is toggled by clicking the avatar button.
+ *
+ * @returns {JSX.Element} The rendered user button and dropdown menu.
+ *
+ * @remarks
+ * - Requires user session data from `useSession`.
+ * - Uses Next.js router for navigation.
+ * - Handles user sign out via `signOut`.
+ *
+ * @example
+ * ```tsx
+ * <UserButton />
+ * ```
+ */
 export default function UserButton() {
     const [isOpen, setIsOpen] = useState(false);
     const { data: session } = useSession();

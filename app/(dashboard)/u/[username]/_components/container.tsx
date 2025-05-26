@@ -9,6 +9,16 @@ interface ContainerProps {
     children: React.ReactNode;
 }
 
+/**
+ * Container component that adjusts its left margin based on the sidebar's collapsed state
+ * and the current viewport width.
+ *
+ * - Uses a media query to detect if the viewport is less than or equal to 1024px wide.
+ * - Collapses or expands the sidebar accordingly by calling `onCollapse` or `onExpand`.
+ * - Applies different left margin classes based on the sidebar's collapsed state.
+ *
+ * @param children - The content to be rendered inside the container.
+ */
 export const Container = ({ children }: ContainerProps) => {
     const matches = useMediaQuery('(max-width: 1024px)');
     const { collapsed, onCollapse, onExpand } = useCreatorSidebar(state => state);

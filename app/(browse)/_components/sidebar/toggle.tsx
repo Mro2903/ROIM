@@ -6,6 +6,16 @@ import {Button} from "@/components/ui/button";
 import { Hint } from "@/components/hint";
 import {Skeleton} from "@/components/ui/skeleton";
 
+/**
+ * Sidebar toggle component that allows users to expand or collapse the sidebar.
+ *
+ * - When the sidebar is expanded, displays a "Collapse" button and a label.
+ * - When the sidebar is collapsed, displays an "Expand" button centered in the sidebar.
+ * - Uses `useSidebar` hook to access and control the sidebar's collapsed state.
+ * - Shows contextual hints for accessibility.
+ *
+ * @returns {JSX.Element} The rendered toggle button(s) for the sidebar.
+ */
 export const Toggle = () => {
     const { collapsed, onExpand, onCollapse } = useSidebar((state) => state);
 

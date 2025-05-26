@@ -9,6 +9,17 @@ interface KeyCardProps {
     value: string | null
 }
 
+/**
+ * Renders a card component displaying a stream key with options to show/hide and copy the key.
+ *
+ * @param value - The stream key to display in the input field.
+ *
+ * The component includes:
+ * - A label for the stream key.
+ * - An input field showing the stream key (masked or visible based on toggle).
+ * - A button to copy the stream key.
+ * - A button to toggle visibility of the stream key.
+ */
 export const KeyCard = ({ value }: KeyCardProps) => {
     const [show, setShow] = useState(false);
 

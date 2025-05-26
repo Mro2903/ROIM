@@ -6,6 +6,15 @@ import {Button} from "@/components/ui/button";
 import { Hint } from "@/components/hint";
 import {Skeleton} from "@/components/ui/skeleton";
 
+/**
+ * Sidebar toggle component for expanding or collapsing the creator dashboard sidebar.
+ *
+ * This component displays a button that allows users to expand or collapse the sidebar.
+ * When expanded, it shows a "Collapse" button with a left arrow icon and a "Dashboard" label.
+ * When collapsed, it shows an "Expand" button with a right arrow icon.
+ *
+ * @returns {JSX.Element} The rendered toggle button for the sidebar.
+ */
 export const Toggle = () => {
     const { collapsed, onExpand, onCollapse } = useCreatorSidebar((state) => state);
 

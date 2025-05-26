@@ -12,6 +12,15 @@ interface FollowingProps {
     })[];
 }
 
+/**
+ * Renders a list of users that the current user is following in the sidebar.
+ * Displays a section header when the sidebar is expanded and the list is not empty.
+ *
+ * @param data - An array of user objects representing the followed users.
+ * Each user object should contain a `following` property with `name`, `image`, `id`, and optional `stream` with `isLive`.
+ *
+ * @returns A React component displaying the list of followed users, or null if the list is empty.
+ */
 export const Following = ({ data }: FollowingProps) => {
     const {collapsed} = useSidebar((state) => state);
 

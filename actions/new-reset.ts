@@ -7,6 +7,24 @@ import {NewPasswordSchema} from "@/schemas"
 import * as z from "zod";
 import bcrypt from "bcryptjs";
 
+/**
+ * Resets a user's password using a provided reset token and new password data.
+ *
+ * This function performs the following steps:
+ * 1. Validates the input data against the `NewPasswordSchema`.
+ * 2. Checks if the provided passwords match.
+ * 3. Hashes the new password.
+ * 4. Verifies the validity and expiration of the reset token.
+ * 5. Ensures the user associated with the token exists.
+ * 6. Updates the user's password in the database.
+ * 7. Deletes the used reset token.
+ *
+ * Returns an object indicating success or an error message.
+ *
+ * @param token - The password reset token provided to the user.
+ * @param data - The new password data, validated against `NewPasswordSchema`.
+ * @returns An object containing either a `success` message or an `error` message.
+ */
 export const newReset = async (token: string, data: z.infer<typeof NewPasswordSchema>) => {
     try {
         // Validate the input data

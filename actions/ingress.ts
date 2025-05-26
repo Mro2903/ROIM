@@ -21,22 +21,18 @@ const roomService = new RoomServiceClient(
 
 const ingressClient = new IngressClient(process.env.LIVEKIT_URL!);
 
-export const resetIngress = async (hostId: string) => {
-    const  ingresses = await ingressClient.listIngress({
-        roomName: hostId,
-    });
-
-    const rooms = await roomService.listRooms([hostId]);
-    for (const room of rooms) {
-        await roomService.deleteRoom(room.sid);
-    }
-    for (const ingress of ingresses) {
-        if (ingress.ingressId) {
-            await ingressClient.deleteIngress(ingress.ingressId);
-        }
-    }
-}
-
+/**
+ * Resets all ingress and room resources associated with a given host ID.
+ *
+ * This function performs the following steps:
+ * 1. Retrieves all ingress resources associated with the specified `hostId`.
+ * 2. Retrieves all rooms associated with the specified `hostId`.
+ * 3. Deletes each room found.
+ * 4. Deletes each ingress resource found (if it has an `ingressId`).
+ *
+ * @param hostId - The unique identifier for the host whose ingress and rooms should be reset.
+ * @returns A promise that resolves when all associated ingress and room resources have been deleted.
+ */
 export const createIngress = async (ingressType: IngressInput) => {
     const session = await auth();
     const user = session?.user as User;

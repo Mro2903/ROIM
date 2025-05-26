@@ -16,6 +16,17 @@ export const metadata: Metadata = {
     },
 };
 
+/**
+ * Root layout component for the application.
+ *
+ * Wraps the entire app with necessary providers and global styles.
+ * - Sets the HTML language to English.
+ * - Applies custom font variables and antialiasing to the body.
+ * - Includes global Providers and a Toaster for notifications.
+ *
+ * @param children - The React node(s) to be rendered within the layout.
+ * @returns The root HTML structure for the application.
+ */
 export default function RootLayout({
                                        children,
                                    }: Readonly<{

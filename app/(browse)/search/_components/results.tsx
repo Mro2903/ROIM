@@ -6,6 +6,12 @@ interface ResultsProps {
     term?: string;
 }
 
+/**
+ * Asynchronously fetches and displays search results for a given term.
+ *
+ * @param term - The search term to query results for.
+ * @returns A React component that renders a list of results or a message if no results are found.
+ */
 export const Results = async ({ term }: ResultsProps) => {
     const data = await getSearch(term);
 

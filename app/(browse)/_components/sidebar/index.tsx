@@ -5,6 +5,13 @@ import {getRecommended} from "@/lib/recommended-service";
 import {getFollowedUsers} from "@/lib/follow-service";
 import {Following, FollowingSkeleton} from "@/app/(browse)/_components/sidebar/following";
 
+/**
+ * Sidebar component that asynchronously fetches and displays recommended users and followed users.
+ *
+ * @returns {JSX.Element} The rendered sidebar containing toggle, followed users, and recommended users sections.
+ *
+ * @async
+ */
 export const Sidebar = async () => {
     const recommended = await getRecommended();
     const following = await getFollowedUsers();

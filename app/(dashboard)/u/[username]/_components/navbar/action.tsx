@@ -6,6 +6,12 @@ import {LogOut} from "lucide-react";
 import UserButton, {UserButtonSkeleton} from "@/components/auth/userButton";
 import {Skeleton} from "@/components/ui/skeleton";
 
+/**
+ * Renders the action section of the navbar, including a logout button that navigates to the public page
+ * and a user profile button.
+ *
+ * @returns {JSX.Element} The action section containing navigation and user controls.
+ */
 export const Action = () => {
     return (
         <div className="flex items-center gap-x-2 justify-end ml-4 lg:ml-0">

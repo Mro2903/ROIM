@@ -14,6 +14,17 @@ interface NavItemProps {
     isActive: boolean
 }
 
+/**
+ * Renders a navigation item for the sidebar, displaying an icon and label.
+ *
+ * @param label - The text label for the navigation item.
+ * @param href - The URL to navigate to when the item is clicked.
+ * @param icon - The icon component to display alongside the label.
+ * @param isActive - Indicates if the navigation item is currently active.
+ *
+ * The component adapts its layout based on the sidebar's collapsed state,
+ * showing only the icon when collapsed and both icon and label when expanded.
+ */
 export const NavItem = ({label, href, icon : Icon, isActive}: NavItemProps) => {
     const { collapsed } = useCreatorSidebar(state => state);
     return (

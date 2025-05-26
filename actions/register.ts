@@ -7,6 +7,23 @@ import { RegisterSchema } from "@/schemas";
 import { generateVerificationToken } from "@/lib/token";
 import { sendEmail } from "@/lib/mail";
 
+/**
+ * Registers a new user with the provided data.
+ *
+ * This function performs the following steps:
+ * 1. Validates the input data against the `RegisterSchema`.
+ * 2. Checks if the passwords match.
+ * 3. Hashes the password using bcrypt and a secret.
+ * 4. Checks if the email or name is already in use.
+ * 5. Creates a new user in the database.
+ * 6. Generates and sends an email verification token.
+ *
+ * @param data - The registration data conforming to `RegisterSchema`.
+ * @returns An object containing either a success message or an error message.
+ *
+ * @throws Will return an error object if validation fails, the user already exists, 
+ *         passwords do not match, or if there is a database/service error.
+ */
 export const register = async (data: z.infer<typeof RegisterSchema>) => {
   try {
     // Validate the input data

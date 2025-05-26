@@ -8,6 +8,23 @@ import {getAccountByUserId} from "@/data/account";
 import {getUserByEmail} from "@/data/user";
 
 
+/**
+ * Handles the password reset process for a user.
+ *
+ * This function validates the provided data against the `ResetPasswordSchema`,
+ * checks if the user exists and has a password-based account, verifies the user's email,
+ * generates a password reset token, and sends a reset password email.
+ *
+ * @param data - The input data containing the user's email, validated against `ResetPasswordSchema`.
+ * @returns An object indicating success or an error message if the process fails at any step.
+ *
+ * @throws Returns an error object if:
+ * - The input data is invalid.
+ * - The user does not exist.
+ * - The user does not have a password-based account (e.g., Google account).
+ * - The user's email is not verified.
+ * - There is a database or service error.
+ */
 export const reset = async (data: z.infer<typeof ResetPasswordSchema>) => {
     try {
         // Validate the input data

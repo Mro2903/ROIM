@@ -6,7 +6,18 @@ import CardWrapper from "../card-wrapper"
 import { FormSuccess } from "../form-success"
 import { FormError } from "../form-error"
 import { newVerification } from "@/actions/new-verification"
-
+/**
+ * A React component that handles email verification in a Next.js application.
+ * 
+ * This component:
+ * - Extracts the verification token from the URL search parameters.
+ * - Calls the `newVerification` action to verify the email address using the token.
+ * - Displays loading, success, or error messages based on the verification result.
+ * - Uses a card layout with navigation back to the login page.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered email verification form.
+ */
 const VerifyEmailForm = () => {
     const [error, setError] = useState<string | undefined>(undefined);
     const [success, setSuccess] = useState<string | undefined>(undefined);

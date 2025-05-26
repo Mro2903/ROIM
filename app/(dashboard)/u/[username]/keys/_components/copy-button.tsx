@@ -8,6 +8,14 @@ interface CopyButtonProps {
     value?: string;
 }
 
+/**
+ * A button component that copies a given value to the clipboard when clicked.
+ * Displays a check icon for 2 seconds after copying to indicate success.
+ *
+ * @param value - The string value to be copied to the clipboard.
+ *
+ * @returns A button element that handles clipboard copy functionality and visual feedback.
+ */
 export const CopyButton = ({ value }: CopyButtonProps) => {
     const [isCopied, setCopied] = useState(false);
 

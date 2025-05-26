@@ -1,8 +1,17 @@
+/**
+ * Alert component for displaying important messages to users.
+ * Supports different variants and includes title and description subcomponents.
+ */
+
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Alert variants configuration using class-variance-authority
+ * Defines the base styles and variant-specific styles for alerts
+ */
 const alertVariants = cva(
     "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
     {
@@ -19,6 +28,13 @@ const alertVariants = cva(
     }
 )
 
+/**
+ * Main Alert component
+ * @param {Object} props - Component props
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {("default"|"destructive")} [props.variant] - Alert variant
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref
+ */
 const Alert = React.forwardRef<
     HTMLDivElement,
     React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
@@ -32,6 +48,12 @@ const Alert = React.forwardRef<
 ))
 Alert.displayName = "Alert"
 
+/**
+ * Alert title component
+ * @param {Object} props - Component props
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLParagraphElement>} ref - Forwarded ref
+ */
 const AlertTitle = React.forwardRef<
     HTMLParagraphElement,
     React.HTMLAttributes<HTMLHeadingElement>
@@ -44,6 +66,12 @@ const AlertTitle = React.forwardRef<
 ))
 AlertTitle.displayName = "AlertTitle"
 
+/**
+ * Alert description component
+ * @param {Object} props - Component props
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLParagraphElement>} ref - Forwarded ref
+ */
 const AlertDescription = React.forwardRef<
     HTMLParagraphElement,
     React.HTMLAttributes<HTMLParagraphElement>

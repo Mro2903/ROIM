@@ -6,6 +6,18 @@ import { getVerificationTokenByToken} from "@/data/token"
 import {generateVerificationToken} from "@/lib/token";
 import {sendEmail} from "@/lib/mail";
 
+/**
+ * Verifies a user's email address using a verification token.
+ *
+ * This function checks if the provided token exists and is valid. If the token has expired,
+ * it generates a new verification token and sends a verification email to the user.
+ * If the token is valid and the user exists, it marks the user's email as verified and deletes the used token.
+ *
+ * @param token - The verification token to validate and process.
+ * @returns An object indicating the result of the verification process:
+ *   - `{ error: string }` if the token is invalid, expired, or the user is not found.
+ *   - `{ success: string }` if the email was successfully verified.
+ */
 export const newVerification = async (token: string) => {
     const existingToken = await getVerificationTokenByToken(token)
 

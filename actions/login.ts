@@ -6,6 +6,19 @@ import {signIn} from "@/auth";
 import {db} from "@/lib/db";
 import {AuthError} from "next-auth";
 
+/**
+ * Attempts to log in a user with the provided credentials.
+ *
+ * @param data - The user login data, validated against the `LoginSchema`.
+ * @returns An object containing either a `success` message or an `error` message.
+ *
+ * @remarks
+ * - Validates the input data using `LoginSchema`.
+ * - Checks if the user exists and has a password (not a Google account).
+ * - Attempts to sign in using the "credentials" provider.
+ * - Handles various authentication errors and returns appropriate error messages.
+ * - Throws an error if a redirect is required.
+ */
 export const login = async (data: z.infer<typeof LoginSchema>) => {
     const validatedData = LoginSchema.parse(data);
     if (!validatedData) {

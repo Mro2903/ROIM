@@ -5,6 +5,18 @@ import {db} from "@/lib/db";
 
 const f = createUploadthing();
 
+/**
+ * Defines the file upload routes and their associated middleware and completion handlers.
+ *
+ * @remarks
+ * This router provides two upload endpoints:
+ * - `thumbnailUploader`: Handles image uploads for stream thumbnails. Requires user authentication and updates the user's stream with the uploaded thumbnail URL.
+ * - `profileImageUploader`: Handles image uploads for user profile images. Requires user authentication and updates the user's profile image URL.
+ *
+ * Both uploaders enforce a maximum file size of 4MB and allow only one file per upload.
+ *
+ * @satisfies FileRouter
+ */
 export const ourFileRouter = {
     thumbnailUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
         .middleware(async () => {

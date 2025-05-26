@@ -2,6 +2,15 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {Skeleton} from "@/components/ui/skeleton";
 
+/**
+ * Renders the ROIM logo component with an avatar and branding text.
+ *
+ * The logo is wrapped in a Next.js `Link` that navigates to the home page.
+ * On large screens, it displays both the logo and the platform description.
+ * On smaller screens, only the logo avatar is shown.
+ *
+ * @returns {JSX.Element} The logo component for the navigation bar.
+ */
 export const Logo = () => {
     return (
         <Link href="/">

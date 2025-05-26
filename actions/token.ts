@@ -6,6 +6,19 @@ import {getUserById} from "@/data/user";
 import {auth} from "@/auth";
 import {isBlockedByUser} from "@/lib/block-service";
 
+/**
+ * Generates a LiveKit access token for a viewer attempting to join a host's room.
+ *
+ * - If the user is authenticated, uses their session information.
+ * - If not authenticated, generates a guest identity.
+ * - Verifies the host exists and that the viewer is not blocked by the host.
+ * - Assigns the "host" identity if the viewer is the host.
+ * - Grants permission to join the room and publish data, but not to publish media.
+ *
+ * @param hostIdentity - The unique identifier of the host user whose room is being joined.
+ * @returns A promise that resolves to a JWT access token string for LiveKit.
+ * @throws If the host is not found or the viewer is blocked by the host.
+ */
 export const createViewerToken = async (hostIdentity: string) => {
     let self;
 

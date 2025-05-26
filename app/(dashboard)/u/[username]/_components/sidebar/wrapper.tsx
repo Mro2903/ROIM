@@ -7,6 +7,17 @@ interface WrapperProps {
     children: React.ReactNode;
 }
 
+/**
+ * Wrapper component for the sidebar section.
+ *
+ * @remarks
+ * This component renders an <aside> element that serves as a container for sidebar content.
+ * It applies responsive width and styling based on the `collapsed` state from the sidebar store.
+ *
+ * @param children - The content to be rendered inside the sidebar wrapper.
+ *
+ * @returns The sidebar wrapper element containing the provided children.
+ */
 export const Wrapper = ({children}: WrapperProps) => {
     const {collapsed} = useCreatorSidebar(state => state)
 

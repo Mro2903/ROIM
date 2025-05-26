@@ -3,6 +3,15 @@ import {Action, ActionSkeleton} from "./action"
 import {Wrapper} from "./wrapper";
 
 
+/**
+ * Renders the main navigation bar for the dashboard.
+ *
+ * The `Navbar` component displays a fixed navigation bar at the top of the page,
+ * containing the application logo and action buttons. It uses a wrapper for layout
+ * and applies responsive and theme-based styles.
+ *
+ * @returns {JSX.Element} The rendered navigation bar component.
+ */
 export const Navbar = () => {
     return (
         <Wrapper>

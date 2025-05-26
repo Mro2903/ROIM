@@ -2,6 +2,13 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {Skeleton} from "@/components/ui/skeleton";
 
+/**
+ * Renders the application logo with an avatar and title for the Creator Dashboard.
+ * The logo is wrapped in a link that navigates to the home page.
+ * On large screens, displays the application name and dashboard label.
+ *
+ * @returns {JSX.Element} The logo component for the navigation bar.
+ */
 export const Logo = () => {
     return (
         <Link href="/">

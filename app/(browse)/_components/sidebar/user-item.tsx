@@ -15,6 +15,21 @@ interface UserItemProps {
     isLive?: boolean;
 }
 
+/**
+ * Renders a user item for the sidebar, displaying the user's avatar, username, and live status.
+ *
+ * @param {UserItemProps} props - The properties for the user item.
+ * @param {string} props.username - The username to display and use for navigation.
+ * @param {string} props.image - The URL of the user's avatar image.
+ * @param {boolean} props.isLive - Indicates if the user is currently live.
+ *
+ * @returns {JSX.Element} The rendered sidebar user item component.
+ *
+ * @remarks
+ * - Highlights the item if it matches the current pathname.
+ * - Adjusts layout based on sidebar collapsed state.
+ * - Shows a live badge if the user is live and the sidebar is expanded.
+ */
 export const UserItem = ({ username, image, isLive }: UserItemProps) => {
     const { collapsed } = useSidebar((state) => state);
     const pathname = usePathname();

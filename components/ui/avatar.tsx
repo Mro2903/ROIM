@@ -1,10 +1,22 @@
 "use client"
 
+/**
+ * Avatar component for displaying user profile images.
+ * Built on top of Radix UI's Avatar primitive.
+ * Includes support for fallback content when image fails to load.
+ */
+
 import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Main Avatar component
+ * @param {Object} props - Component props
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref
+ */
 const Avatar = React.forwardRef<
     React.ElementRef<typeof AvatarPrimitive.Root>,
     React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
@@ -20,6 +32,12 @@ const Avatar = React.forwardRef<
 ))
 Avatar.displayName = AvatarPrimitive.Root.displayName
 
+/**
+ * Avatar image component
+ * @param {Object} props - Component props
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLImageElement>} ref - Forwarded ref
+ */
 const AvatarImage = React.forwardRef<
     React.ElementRef<typeof AvatarPrimitive.Image>,
     React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
@@ -32,6 +50,13 @@ const AvatarImage = React.forwardRef<
 ))
 AvatarImage.displayName = AvatarPrimitive.Image.displayName
 
+/**
+ * Avatar fallback component
+ * Displayed when the image fails to load
+ * @param {Object} props - Component props
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref
+ */
 const AvatarFallback = React.forwardRef<
     React.ElementRef<typeof AvatarPrimitive.Fallback>,
     React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>

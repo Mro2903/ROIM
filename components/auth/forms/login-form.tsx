@@ -22,7 +22,20 @@ import {FormError} from "../form-error";
 import GoogleLogin from "@/components/auth/google-login";
 import Link from "next/link";
 import {useSearchParams, useRouter} from "next/navigation";
-
+/**
+ * `LoginForm` is a React component that renders a login form for user authentication.
+ * 
+ * Features:
+ * - Uses `react-hook-form` with Zod schema validation for form state management and validation.
+ * - Handles login logic via an async `login` action, displaying success or error messages accordingly.
+ * - Displays loading state while login is in progress.
+ * - Supports social login via a `GoogleLogin` component.
+ * - Provides navigation to registration and password recovery pages.
+ * - Shows form validation errors and server-side errors.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered login form component.
+ */
 const LoginForm = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");

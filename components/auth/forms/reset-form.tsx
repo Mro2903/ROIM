@@ -20,7 +20,25 @@ import {FormSuccess} from "../form-success";
 import {FormError} from "../form-error";
 import {newReset} from "@/actions/new-reset";
 import {useSearchParams} from "next/navigation";
-
+/**
+ * `ResetForm` is a React component that renders a password reset form.
+ * 
+ * This form allows users to set a new password using a token provided via URL search parameters.
+ * It uses `react-hook-form` for form state management and validation, with a Zod schema for input validation.
+ * 
+ * Features:
+ * - Accepts a reset token from the URL query string.
+ * - Validates new password and confirmation fields.
+ * - Displays success and error messages based on the reset operation result.
+ * - Disables the submit button and shows a loading state during submission.
+ * - Provides navigation back to the login page.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <ResetForm />
+ * ```
+ */
 const ResetForm = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");

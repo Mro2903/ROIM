@@ -9,6 +9,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {Skeleton} from "@/components/ui/skeleton";
 
+/**
+ * Search component that provides a search input with clear and submit functionality.
+ *
+ * - Allows users to enter a search term.
+ * - Clears the input when the clear (X) icon is clicked.
+ * - On submit, navigates to the `/search` page with the search term as a query parameter.
+ *
+ * @returns {JSX.Element} The rendered search form component.
+ */
 export const Search = () => {
     const router = useRouter();
     const [value, setValue] = useState("");

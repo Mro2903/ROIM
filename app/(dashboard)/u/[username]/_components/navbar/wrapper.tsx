@@ -8,6 +8,17 @@ interface  WrapperProps {
     children: React.ReactNode;
 }
 
+/**
+ * Wrapper component for the dashboard navbar.
+ *
+ * Renders a navigation bar with a fixed position at the top of the page.
+ * If the component is not mounted on the client (`isClient` is false), it displays skeleton placeholders for the logo and actions.
+ * Once on the client, it renders the provided children inside the navbar.
+ *
+ * @param {WrapperProps} props - The props for the Wrapper component.
+ * @param {React.ReactNode} props.children - The content to render inside the navbar when on the client.
+ * @returns {JSX.Element} The rendered navbar component.
+ */
 export const Wrapper = ({ children }: WrapperProps) => {
     const isClient = useIsClient();
 

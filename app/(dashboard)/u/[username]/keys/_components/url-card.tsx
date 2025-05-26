@@ -6,6 +6,12 @@ interface UrlCardProps {
     value: string | null;
 }
 
+/**
+ * Renders a card component displaying a server URL with a copy button.
+ *
+ * @param value - The server URL to display and copy.
+ * @returns A styled card containing the server URL and a copy-to-clipboard button.
+ */
 export const UrlCard = ({ value }: UrlCardProps) => {
     return (
         <div className="dark:bg-[#2D2E32] bg-white p-6 rounded-xl">
